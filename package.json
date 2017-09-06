@@ -1,0 +1,26 @@
+{
+  "name": "wat_storage",
+  "version": "1.0.0",
+  "description": "REST API for User, Scenario and Run",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webautotester/storage.git"
+  },
+  "author": "Xavier Blanc",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/webautotester/storage/issues"
+  },
+  "homepage": "https://github.com/webautotester/storage#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "mongodb": "^2.2.31",
+    "path": "^0.12.7",
+    "winston": "^2.3.1"
+  }
+}
