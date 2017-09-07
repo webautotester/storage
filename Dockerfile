@@ -21,6 +21,6 @@ RUN npm install
 
 EXPOSE 8085
 
-CMD ["node","index.js","--mongo='mongo'"]
+CMD ["node","index.js","--mongo=mongo"]
 
 

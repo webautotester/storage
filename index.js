@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const argv = require('yargs').argv;
 const mongoServerName = argv.mongo;
 
+winston.info(`Running WAT Storage (connected to Mongo Server : ${mongoServerName})`);
+
 var app = express();
 
 
