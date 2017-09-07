@@ -19,6 +19,8 @@ COPY index.js .
 COPY package.json .
 RUN npm install
 
-CMD ["node","index.js","mongo"]
+EXPOSE 8085
+
+CMD ["node","index.js","--mongo='mongo'"]
 
 

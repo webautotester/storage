@@ -3,8 +3,8 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 
-const mongoServerName = process.argv.slice(2)[0];
-//const db_url = `mongodb://${mongoServerName}:27017/wat_storage`;
+const argv = require('yargs').argv;
+const mongoServerName = argv.mongo;
 
 var app = express();
 
@@ -29,6 +29,6 @@ files.forEach(function(file) {
 	route.init(mongoServerName, app);
 });
 
-app.listen(9090, function() {
-	winston.info('wat_storage is listenning on port 9090');
+app.listen(8085, function() {
+	winston.info('wat_storage is listenning on port 8085');
 });
