@@ -8,12 +8,12 @@ module.exports.init = function(mongoServerName, webServer) {
 		MongoClient.connect(dbUrl).then(db => {
 			db.collection('scenario', function(err, scenarioCollection) {
 				if (err) {
-					res.send(err).status(404).end();
+					res.status(404).send(err).end();
 				} else {
 					scenarioCollection.find().toArray().then(scenariosArray => {
 						res.send(scenariosArray).status(200).end();
 					}).catch(err => {
-						res.send(err).status(500).end();
+						res.status(500).send(err).end();
 					});
 				}
 			});
@@ -25,13 +25,13 @@ module.exports.init = function(mongoServerName, webServer) {
 	}).get('/scenario/:id', function(req, res) { //req.params.id
 		MongoClient.connect(dbUrl).then(db => {
 			db.collection('scenario').find({_id: new ObjectID(req.params.id)}).toArray().then(founds => {
-				res.send(founds).status(200).end();
+				res.status(200).send(founds).end();
 			}).catch(err => {
-				res.send(err).status(500).end();
+				res.status(500).send(err).end();
 			});
 			db.close();
 		}).catch(err => {
-			res.send(err).status(500).end();
+			res.status(500).send(err).end();
 		});
 	});
     
@@ -44,16 +44,16 @@ module.exports.init = function(mongoServerName, webServer) {
 					var newScenario = req.body;
 					newScenario._id = ObjectID();  
 					scenarioCollection.save(newScenario).then(savedScenario => {
-						res.send(savedScenario).status(200).end();
+						res.status(200).send(savedScenario).end();
 					}).catch(err => {
-						res.send(err).status(500).end();
+						res.status(500).send(err).end();
 					});
 				}
 			});
 			db.close();
 		}).catch(err => {
 			winston.info(err);
-			res.send(err).status(500).end;
+			res.status(500).send(err).end;
 		});
 	});
 };
