@@ -8,30 +8,30 @@ module.exports.init = function(mongoServerName, webServer) {
 		MongoClient.connect(dbUrl).then(db => {
 			db.collection('run', function(err, runCollection) {
 				if (err) {
-					res.send(err).status(404).end();
+					res.status(404).send(err).end();
 				} else {
 					runCollection.find().toArray().then(runsArray => {
-						res.send(runsArray).status(200).end();
+						res.status(200).send(runsArray).end();
 					}).catch(err => {
-						res.send(err).status(500).end();
+						res.status(500).send(err).end();
 					});
 				}
 			});
 			db.close();
 		}).catch(err => {
 			winston.info(err);
-			res.send(err).status(500).end;
+			res.status(500).send(err).end;
 		});
 	}).get('/run/:id', function(req, res) { //req.params.id
 		MongoClient.connect(dbUrl).then(db => {
 			db.collection('run').find({_id: new ObjectID(req.params.id)}).toArray().then(founds => {
-				res.send(founds).status(200).end();
+				res.status(200).send(founds).end();
 			}).catch(err => {
-				res.send(err).status(500).end();
+				res.status(500).send(err).end();
 			});
 			db.close();
 		}).catch(err => {
-			res.send(err).status(500).end();
+			res.status(500).send(err).end();
 		});
 	});
     
@@ -39,21 +39,21 @@ module.exports.init = function(mongoServerName, webServer) {
 		MongoClient.connect(dbUrl).then(db => {
 			db.collection('run', function(err, runCollection) {
 				if (err) {
-					res.send(err).status(404).end();
+					res.status(404).send(err).end();
 				} else {
 					var newRun = req.body;
 					newRun._id = ObjectID();  
 					runCollection.save(newRun).then(savedRun => {
-						res.send(savedRun).status(200).end();
+						res.status(200).send(savedRun).end();
 					}).catch(err => {
-						res.send(err).status(500).end();
+						res.status(500).send(err).end();
 					});
 				}
 			});
 			db.close();
 		}).catch(err => {
 			winston.info(err);
-			res.send(err).status(500).end;
+			res.status(500).send(err).end;
 		});
 	});
 };
