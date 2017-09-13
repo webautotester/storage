@@ -12,12 +12,13 @@ module.exports.init = function(mongoServerName, webServer) {
 				} else {
 					scenarioCollection.find().toArray().then(scenariosArray => {
 						res.send(scenariosArray).status(200).end();
+						db.close();
 					}).catch(err => {
 						res.status(500).send(err).end();
 					});
 				}
 			});
-			db.close();
+			
 		}).catch(err => {
 			winston.info(err);
 			res.send(err).status(500).end;
@@ -31,6 +32,7 @@ module.exports.init = function(mongoServerName, webServer) {
 			});
 			db.close();
 		}).catch(err => {
+			winston.error(err);
 			res.status(500).send(err).end();
 		});
 	});
@@ -46,13 +48,14 @@ module.exports.init = function(mongoServerName, webServer) {
 					scenarioCollection.save(newScenario).then(savedScenario => {
 						res.status(200).send(savedScenario).end();
 					}).catch(err => {
+						winston.error(err);
 						res.status(500).send(err).end();
 					});
 				}
 			});
 			db.close();
 		}).catch(err => {
-			winston.info(err);
+			winston.error(err);
 			res.status(500).send(err).end;
 		});
 	});
