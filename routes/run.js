@@ -8,7 +8,7 @@ module.exports.init = (mongoServerName, webServer) => {
 		.get('/run', (req, res) => {
 			MongoClient.connect(dbUrl)
 				.then(db => {
-					db.collection('run', (err, runCollection) => {
+					db.collection('run', {strict:true}, (err, runCollection) => {
 						if (err) {
 							res.status(404).send(err).end();
 							db.close();
@@ -32,7 +32,7 @@ module.exports.init = (mongoServerName, webServer) => {
 		.get('/run/:sid', (req, res) => { //req.params.id
 			MongoClient.connect(dbUrl)
 				.then(db => {
-					db.collection('run').find({sid: new ObjectID(req.params.sid)}).toArray()
+					db.collection('run', {strict:true}).find({sid: new ObjectID(req.params.sid)}).toArray()
 						.then(founds => {
 							res.status(200).send(founds).end();
 							db.close();

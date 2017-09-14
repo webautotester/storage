@@ -8,7 +8,7 @@ module.exports.init = (mongoServerName, webServer) => {
 		.get('/scenario', (req, res) => {
 			MongoClient.connect(dbUrl)
 				.then(db => {
-					db.collection('scenario', (err, scenarioCollection) => {
+					db.collection('scenario', {strict:true}, (err, scenarioCollection) => {
 						if (err) {
 							res.status(404).send(err).end();
 							db.close();
